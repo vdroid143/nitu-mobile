@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nitu Mobile Center & Electronics</title>
+
+<style>
+  :root {
+    --primary: #0a0a0f;
+    --accent: #ff2d55;
+    --blue: #0066ff;
+    --gold: #ffbe00;
+    --surface: #111118;
+    --card: #16161f;
+    --border: rgba(255,255,255,0.07);
+    --text: #ffffff;
+    --muted: rgba(255,255,255,0.55);
+    --glow-red: rgba(255,45,85,0.25);
+    --glow-blue: rgba(0,102,255,0.2);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: var(--primary);
+    color: var(--text);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── TICKER ─── */
+  .ticker {
+    background: var(--accent);
+    padding: 8px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-block;
+    animation: tickerMove 25s linear infinite;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  @keyframes tickerMove {
+    0%   { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: rgba(10,10,15,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--accent), #ff6b35);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    box-shadow: 0 0 20px var(--glow-red);
+  }
+
+  .logo-words { line-height: 1.2; }
+
+  .logo-name {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    font-size: 17px;
+    letter-spacing: 1px;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  .logo-sub {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+
+  .header-cta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .nav-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    transition: all 0.25s;
+    box-shadow: 0 4px 15px var(--glow-red);
+  }
+  .nav-call:hover {
+    background: #e0002a;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px var(--glow-red);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 88vh;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Animated background blobs */
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,45,85,0.12) 0%, transparent 70%);
+    top: -100px; left: -150px;
+    border-radius: 50%;
+    animation: blobMove1 8s ease-in-out infinite;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,102,255,0.10) 0%, transparent 70%);
+    bottom: -100px; right: -100px;
+    border-radius: 50%;
+    animation: blobMove2 10s ease-in-out infinite;
+  }
+
+  @keyframes blobMove1 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(60px, 40px) scale(1.1); }
+  }
+  @keyframes blobMove2 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(-50px, -30px) scale(1.08); }
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,45,85,0.12);
+    border: 1px solid rgba(255,45,85,0.3);
+    color: var(--accent);
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .hero-eyebrow span { color: white; }
+
+  .hero-title {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    font-size: clamp(40px, 9vw, 88px);
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .hero-title .line1 { color: white; }
+  .hero-title .line2 {
+    background: linear-gradient(90deg, var(--accent), #ff8c00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto 36px;
+  }
+
+  .hero-sub strong { color: var(--gold); font-weight: 600; }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-red {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: white;
+    padding: 16px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    box-shadow: 0 6px 30px var(--glow-red);
+  }
+  .btn-red:hover {
+    background: #e0002a;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px var(--glow-red);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    color: white;
+    padding: 16px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: all 0.3s;
+  }
+  .btn-ghost:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.4);
+    transform: translateY(-2px);
+  }
+
+  /* ─── STATS STRIP ─── */
+  .stats-strip {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 24px;
+  }
+
+  .stats-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .stat {
+    text-align: center;
+    padding: 16px;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    font-size: 34px;
+    line-height: 1;
+    margin-bottom: 4px;
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-label {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  /* ─── SECTION ─── */
+  .sec {
+    padding: 80px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .sec-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .sec-tag::before {
+    content: '';
+    display: block;
+    width: 20px; height: 2px;
+    background: var(--accent);
+  }
+
+  .sec-title {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 5vw, 48px);
+    line-height: 1.15;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+  }
+
+  .sec-title em {
+    font-style: normal;
+    background: linear-gradient(90deg, var(--accent), #ff8c00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .sec-desc {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 500px;
+    margin-bottom: 48px;
+  }
+
+  /* ─── BRANDS ─── */
+  .brands-wrap { background: var(--primary); padding: 80px 0; }
+  .brands-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  .brands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+
+  .brand-tile {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 16px 18px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-tile:hover {
+    border-color: var(--accent);
+    background: rgba(255,45,85,0.07);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px var(--glow-red);
+  }
+
+  .brand-img-wrap {
+    width: 80px; height: 50px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 6px;
+  }
+
+  .brand-img-wrap img {
+    max-width: 100%; max-height: 100%;
+    object-fit: contain;
+  }
+
+  .brand-tile-name {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.3s;
+  }
+
+  .brand-tile:hover .brand-tile-name { color: white; }
+
+  /* ─── SERVICES ─── */
+  .services-wrap {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 80px 0;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .svc-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .svc-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,45,85,0.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .svc-card:hover { border-color: rgba(255,45,85,0.3); transform: translateY(-4px); }
+  .svc-card:hover::before { opacity: 1; }
+
+  .svc-icon-wrap {
+    width: 52px; height: 52px;
+    background: rgba(255,45,85,0.1);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,45,85,0.2);
+  }
+
+  .svc-card h3 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 0.3px;
+    margin-bottom: 10px;
+  }
+
+  .svc-card p {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 400;
+  }
+
+  /* ─── ADDRESS ─── */
+  .addr-wrap {
+    background: var(--primary);
+    padding: 80px 0;
+  }
+
+  .addr-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  @media (max-width: 700px) {
+    .addr-grid { grid-template-columns: 1fr; }
+  }
+
+  .addr-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 28px;
+    align-items: flex-start;
+  }
+
+  .addr-icon {
+    width: 44px; height: 44px;
+    background: rgba(255,45,85,0.1);
+    border: 1px solid rgba(255,45,85,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .addr-item-text {}
+  .addr-item-label {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .addr-item-val {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .addr-item-val a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .addr-item-val a:hover { color: white; }
+
+  .map-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    padding: 32px;
+    text-align: center;
+  }
+
+  .map-icon-big { font-size: 56px; margin-bottom: 16px; }
+
+  .map-card h3 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .map-card p {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue);
+    color: white;
+    padding: 13px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px var(--glow-blue);
+  }
+  .map-link:hover {
+    background: #0052cc;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--glow-blue);
+  }
+
+  /* ─── CTA ─── */
+  .cta-wrap {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 80px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-wrap::before {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,45,85,0.1) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+  }
+
+  .cta-content { position: relative; z-index: 2; }
+
+  .cta-eyebrow {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .cta-title {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    font-size: clamp(30px, 6vw, 58px);
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+
+  .cta-sub {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: var(--muted);
+    font-size: 16px;
+    margin-bottom: 36px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--primary);
+    border-top: 1px solid var(--border);
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  footer strong { color: var(--gold); font-weight: 600; }
+
+  /* ─── FLOATING WA ─── */
+  .wa-float {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    z-index: 999;
+  }
+
+  .wa-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #25d366;
+    color: white;
+    padding: 14px 22px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+    animation: waFloat 3.5s ease-in-out infinite;
+    transition: background 0.2s;
+  }
+  .wa-btn:hover { background: #1da851; }
+
+  @keyframes waFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+  }
+
+  /* brand color bg helpers */
+  .b-white { background: #f5f5f5; }
+  .b-dark  { background: #111; }
+  .b-green { background: #0d9a5e; }
+  .b-indigo{ background: #eef0ff; }
+  .b-ylw  { background: #fffce0; }
+  .b-orng  { background: #fff4e0; }
+  .b-lime  { background: #c8e6c9; }
+  .b-blue  { background: #1565c0; }
+  .b-amber { background: #fffde7; }
+</style>
+</head>
+<body>
+
+<!-- FLOATING WHATSAPP -->
+<div class="wa-float">
+  <a href="https://wa.me/918237999143" target="_blank" class="wa-btn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    WhatsApp Us
+  </a>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    &nbsp;&nbsp;&nbsp;📱 Best Smartphone Deals in Nalasopara &nbsp;•&nbsp; 🔧 Same Day Repair &nbsp;•&nbsp; ✅ Genuine Accessories &nbsp;•&nbsp; 💰 Best Exchange Rates &nbsp;•&nbsp; 📞 Call: +91 82379 99143 &nbsp;•&nbsp; iPhone · Samsung · OPPO · Vivo · Realme · Redmi · Infinix · Tecno · iQOO &nbsp;•&nbsp;
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">📱</div>
+      <div class="logo-words">
+        <div class="logo-name">Nitu Mobile Center</div>
+        <div class="logo-sub">& Electronics · Nalasopara East</div>
+      </div>
+    </a>
+    <div class="header-cta">
+      <a href="tel:+918237999143" class="nav-call">📞 +91 82379 99143</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">⭐ <span>Trusted Mobile Store</span> · Nalasopara East</div>
+    <h1 class="hero-title">
+      <div class="line1">Your One-Stop</div>
+      <div class="line2">Mobile Shop</div>
+    </h1>
+    <p class="hero-sub">
+      Latest smartphones, genuine accessories, fast repairs &amp; unbeatable prices —
+      <strong>all under one roof</strong> at Nalasopara East.
+    </p>
+    <div class="hero-actions">
+      <a href="tel:+918237999143" class="btn-red">📞 Call Now</a>
+      <a href="https://wa.me/918237999143" target="_blank" class="btn-ghost">💬 WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-num">9+</div>
+      <div class="stat-label">Top Brands</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Happy Customers</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Services</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+  </div>
+</div>
+
+<!-- BRANDS -->
+<div class="brands-wrap">
+  <div class="brands-inner">
+    <div class="sec-tag">Our Brands</div>
+    <h2 class="sec-title">Brands We <em>Sell</em></h2>
+    <p class="sec-desc">All major smartphone brands available in stock with warranty.</p>
+    <div class="brands-grid">
+
+      <div class="brand-tile">
+        <div class="brand-img-wrap b-white">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple iPhone">
+        </div>
+        <div class="brand-tile-name">Apple iPhone</div>
+      </div>
+
+      <div class="brand-tile">
+        <div class="brand-img-wrap b-dark">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Samsung" style="filter:invert(1)">
+        </div>
+        <div class="brand-tile-name">Samsung</div>
+      </div>
+
+      <div class="brand-tile">
+        <div class="brand-img-wrap b-green">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Oppo_logo.svg/512px-Oppo_logo.svg.png" alt="OPPO" style="filter:brightness(0) invert(1)">
+        </div>
+        <div class="brand-tile-name">OPPO</div>
+      </div>
+
+      <div class="brand-tile">
+        <div class="brand-img-wrap b-indigo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Vivo_logo.svg/512px-Vivo_logo.svg.png" alt="Vivo">
+        </div>
+        <div class="brand-tile-name">Vivo</div>
+      </div>
+
+      <div class="brand-tile">
+        <div class="brand-img-wrap b-ylw">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Realme_logo.svg/512px-Realme_logo.svg.png" alt="Realme">
+        </div>
+        <div class="brand-tile-name">Realme</div>
+      </div>
+
+      <div class="brand-tile">
+        <div class="brand-img-wrap b-orng">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Xiaomi_logo.svg/512px-Xiaomi_logo.svg.png" alt="Redmi">
+        </div>
+        <div class="brand-tile-name">Redmi / Mi</div>
+      </div>
+
+      <div class="brand-tile">
+        <div class="brand-img-wrap b-lime" style="padding:8px;">
+          <span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:900;font-size:15px;color:#111;">Infinix</span>
+        </div>
+        <div class="brand-tile-name">Infinix</div>
+      </div>
+
+      <div class="brand-tile">
+        <div class="brand-img-wrap b-blue" style="padding:8px;">
+          <span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:900;font-size:14px;color:white;">TECNO</span>
+        </div>
+        <div class="brand-tile-name">Tecno</div>
+      </div>
+
+      <div class="brand-tile">
+        <div class="brand-img-wrap b-amber" style="padding:8px;">
+          <span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:900;font-size:16px;color:#111;">iQOO</span>
+        </div>
+        <div class="brand-tile-name">iQOO</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="services-wrap">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div class="sec-tag">What We Do</div>
+    <h2 class="sec-title">Our <em>Services</em></h2>
+    <p class="sec-desc">Everything your phone needs — right here in Nalasopara.</p>
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-icon-wrap">📱</div>
+        <h3>New Phones</h3>
+        <p>Latest models from all top brands with full warranty at the best prices in Nalasopara.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">🔧</div>
+        <h3>Mobile Repair</h3>
+        <p>Screen replacement, battery, charging port, camera & more. Same day service available.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">🎧</div>
+        <h3>Accessories</h3>
+        <p>Original covers, earphones, chargers, cables, screen guards & all kinds of accessories.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">💰</div>
+        <h3>Exchange Offer</h3>
+        <p>Get the best price for your old phone. Easy and transparent exchange deals.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">📺</div>
+        <h3>Electronics</h3>
+        <p>Smart TVs, Bluetooth speakers, power banks, smart watches & more electronics.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">💳</div>
+        <h3>EMI Available</h3>
+        <p>Buy your dream phone now, pay later. Easy EMI options on select smartphones.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADDRESS -->
+<div class="addr-wrap">
+  <div class="addr-grid">
+    <div>
+      <div class="sec-tag">Visit Us</div>
+      <h2 class="sec-title">Find Us <em>Here</em></h2>
+      <p class="sec-desc" style="margin-bottom:36px;">Come visit our store in Nalasopara East. We're open 7 days a week.</p>
+
+      <div class="addr-item">
+        <div class="addr-icon">📍</div>
+        <div class="addr-item-text">
+          <div class="addr-item-label">Address</div>
+          <div class="addr-item-val">Shop No. 1, Sitaram Nagar, Santosh Bhavan,<br>Nalasopara East, Thane, Maharashtra — 401209</div>
+        </div>
+      </div>
+
+      <div class="addr-item">
+        <div class="addr-icon">📞</div>
+        <div class="addr-item-text">
+          <div class="addr-item-label">Phone</div>
+          <div class="addr-item-val"><a href="tel:+918237999143">+91 82379 99143</a></div>
+        </div>
+      </div>
+
+      <div class="addr-item">
+        <div class="addr-icon">💬</div>
+        <div class="addr-item-text">
+          <div class="addr-item-label">WhatsApp</div>
+          <div class="addr-item-val"><a href="https://wa.me/918237999143">Chat with us on WhatsApp</a></div>
+        </div>
+      </div>
+
+      <div class="addr-item">
+        <div class="addr-icon">🕐</div>
+        <div class="addr-item-text">
+          <div class="addr-item-label">Store Hours</div>
+          <div class="addr-item-val">Monday – Sunday &nbsp;|&nbsp; 10:00 AM – 9:00 PM</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-card">
+      <div class="map-icon-big">🗺️</div>
+      <h3>Nitu Mobile Center</h3>
+      <p>Shop No. 1, Sitaram Nagar, Santosh Bhavan,<br>Nalasopara East, Thane — 401209</p>
+      <a href="https://maps.google.com/?q=Sitaram+Nagar+Santosh+Bhavan+Nalasopara+East+Thane+Maharashtra+401209" target="_blank" class="map-link">
+        📍 Open in Google Maps
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-wrap">
+  <div class="cta-content">
+    <div class="cta-eyebrow">🎯 Get The Best Deal Today</div>
+    <h2 class="cta-title">Looking for a<br>New Phone?</h2>
+    <p class="cta-sub">Call us now — best prices guaranteed in Nalasopara!</p>
+    <a href="tel:+918237999143" class="btn-red" style="font-size:17px; padding:18px 44px;">
+      📞 Call: +91 82379 99143
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <strong>Nitu Mobile Center & Electronics</strong> &nbsp;·&nbsp; Shop No. 1, Sitaram Nagar, Nalasopara East, Thane 401209</p>
+</footer>
+
+</body>
+</html>
